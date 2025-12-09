@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Small tweak so settings form looks nice */
+    .settings-container {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: var(--card-bg, #fff);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .settings-container label {
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .settings-container input,
+    .settings-container select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Style for checkbox row */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.10rem;
+      margin-bottom: 1.5rem;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+    body.dark-mode .card {
+      background-color: #1e1e1e;
+      color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⚙ Settings</h1>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="search.html">Search</a>
+      <a href="categories.html">Categories</a>
+      <a href="quotes.html">Idioms</a>
+      <a href="random.html">Random</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="settings-container">
+      <label for="wordCount">Daily Word Count:</label>
+      <select id="wordCount">
+        <option value="1">1 word</option>
+        <option value="2">2 words</option>
+        <option value="3">3 words</option>
+        <option value="4">4 words</option>
+        <option value="5">5 words</option>
+      </select>
+
+      <!-- Checkbox row -->
+      <div class="checkbox-row">
+        <input type="checkbox" id="darkModeToggle">
+        <label for="darkModeToggle">Enable Dark Mode</label>
+      </div>
+
+      <button onclick="saveSettings()">Save Settings</button>
+    </div>
+  </main>
+
+  <!-- Load main script first -->
+  <script src="script.js"></script>
+
+  <!-- Page-specific logic -->
+  <script>
+    // Load settings from localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedCount = localStorage.getItem('dailyWordCount') || '2';
+      document.getElementById('wordCount').value = savedCount;
+
+      const darkMode = localStorage.getItem('darkMode') === 'true';
+      document.getElementById('darkModeToggle').checked = darkMode;
+
+      if (darkMode) {
+        document.body.classList.add('dark-mode');
+      }
+    });
+
+    // Save settings
+    function saveSettings() {
+      const count = document.getElementById('wordCount').value;
+      const darkMode = document.getElementById('darkModeToggle').checked;
+
+      localStorage.setItem('dailyWordCount', count);
+      localStorage.setItem('darkMode', darkMode);
+
+      if (darkMode) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+
+      alert('Settings saved!');
+    }
+  </script>
+</body>
+</html>

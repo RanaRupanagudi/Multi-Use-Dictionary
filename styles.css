@@ -1,0 +1,170 @@
+/* ========== Base Styling ========== */
+:root {
+  --primary: #2196f3;
+  --primary-light: #4cafef;
+  --primary-dark: #1976d2;
+  --bg: #f4f4f4;
+  --text: #333;
+  --card-bg: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ========== Header & Navigation ========== */
+header {
+  background: linear-gradient(90deg, var(--primary-light), var(--primary));
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.2);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+nav a.active {
+  background: gold;
+  color: black;
+}
+
+/* ========== Main Content ========== */
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* ========== Cards ========== */
+.card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: var(--primary-dark);
+}
+
+/* ========== Inputs & Buttons ========== */
+input, select, button {
+  font-family: inherit;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+}
+
+button {
+  background: linear-gradient(45deg, var(--primary-light), var(--primary));
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* ========== Utility ========== */
+.text-center {
+  text-align: center;
+}
+
+.badge {
+  background: gold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: black;
+}/* 🌙 Dark Mode Styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-mode header {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode nav a {
+  color: #f0f0f0;
+}
+
+body.dark-mode nav a.active {
+  background-color: #333;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #333;
+}
+
+body.dark-mode button {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+body.dark-mode button:hover {
+  background-color: #444;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+
+
+/* ========== Mobile Friendly ========== */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+  }
+}

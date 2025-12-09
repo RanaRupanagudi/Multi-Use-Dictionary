@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idioms</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Make sure file name matches -->
+</head>
+<body>
+  <header>
+    <h1>Idioms</h1>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="search.html">Search</a>
+      <a href="categories.html">Categories</a>
+      <a href="quotes.html">Idioms</a>
+      <a href="random.html">Random</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main class="text-center">
+    <section id="quoteContainer">
+      <p>Loading quote...</p>
+    </section>
+
+    <section id="idiomContainer" style="margin-top: 2rem;">
+      <p>Loading idiom...</p>
+    </section>
+  </main>
+ <script src="script.js"></script>
+  <script>
+    // Load a random quote from API
+    function loadQuote() {
+      fetch("https://api.quotable.io/random")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('quoteContainer').innerHTML = `
+            <div class="card">
+              <h2>Quote of the Day</h2>
+              <p>"${data.content}"</p>
+              <small>- ${data.author}</small>
+            </div>
+          `;
+        })
+        .catch(() => {
+          document.getElementById('quoteContainer').innerHTML = `
+            <p></p>
+          `;
+        });
+    }
+
+    // Load a random idiom from a built-in list
+    function loadIdiom() {
+      const idioms = [
+        { phrase: "Break the ice", meaning: "To initiate conversation in a social setting." },
+        { phrase: "Burn the midnight oil", meaning: "To work late into the night." },
+        { phrase: "Hit the sack", meaning: "To go to bed and sleep." },
+        { phrase: "Under the weather", meaning: "Feeling ill or sick." },
+        { phrase: "Once in a blue moon", meaning: "Something that happens very rarely." },
+        { phrase: "Bite the bullet", meaning: "To face a difficult situation with courage." },
+        { phrase: "Spill the beans", meaning: "To reveal a secret unintentionally." }
+      ];
+
+      const randomIdiom = idioms[Math.floor(Math.random() * idioms.length)];
+      document.getElementById('idiomContainer').innerHTML = `
+        <div class="card">
+          <h2>Idiom of the Day</h2>
+          <p><strong>${randomIdiom.phrase}</strong></p>
+          <p>${randomIdiom.meaning}</p>
+        </div>
+      `;
+    }
+
+    // Load both on page start
+    window.onload = function() {
+      loadQuote();
+      loadIdiom();
+    };
+  </script>
+</body>
+</html>
+

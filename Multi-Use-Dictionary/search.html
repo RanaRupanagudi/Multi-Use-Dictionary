@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Words</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Search / Dictionary</h1>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="search.html">Search</a>
+      <a href="categories.html">Categories</a>
+      <a href="quotes.html">Idioms</a>
+      <a href="random.html">Random</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main>
+    <input type="text" id="searchInput" placeholder="Search for a word..." />
+    <div id="searchResult"></div>
+  </main>
+ <script src="script.js"></script>
+  <script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const query = this.value.trim().toLowerCase();
+      const resultDiv = document.getElementById('searchResult');
+
+      if (!query) {
+        resultDiv.innerHTML = '';
+        return;
+      }
+
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.title === "No Definitions Found") {
+            resultDiv.innerHTML = `<p>No match found.</p>`;
+            return;
+          }
+          const wordData = data[0];
+          const meaning = wordData.meanings[0].definitions[0].definition;
+          const example = wordData.meanings[0].definitions[0].example || "No example available.";
+
+          resultDiv.innerHTML = `
+            <div class="card">
+              <h2>${wordData.word}</h2>
+              <p><strong>Meaning:</strong> ${meaning}</p>
+              <p><strong>Example:</strong> ${example}</p>
+            </div>
+          `;
+        })
+        .catch(() => {
+          resultDiv.innerHTML = `<p>⚠ Error fetching word.</p>`;
+        });
+    });
+  </script>
+</body>
+</html>

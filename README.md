@@ -32,7 +32,7 @@ multi-use-dictionary/
 │── styles.css
 
 **How to Use**
-
+Copy all the files into one folder and install node modules.
 Open index.html in your browser.
 Use the navigation menu to explore different features.
 Search words, view random suggestions, access history, and manage favorites.
